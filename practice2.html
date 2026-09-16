@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>CSS Font Control</title>
+	<style>
+		body {
+			margin: 0;
+			padding: 40px 20px;
+			background: #e7f1f7;
+			color: #203040;
+			font-family: Arial, sans-serif;
+		}
+
+		main {
+			width: 900px;
+			max-width: 95%;
+			margin: auto;
+			padding: 30px;
+			background: white;
+			border-radius: 14px;
+			box-shadow: 0 8px 20px #0000001f;
+		}
+
+		h1 {
+			color: #3d5a80;
+		}
+
+		.layout {
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+			gap: 30px;
+			align-items: start;
+		}
+
+		.controls {
+			padding: 20px;
+			background: #f4f7f9;
+			border-radius: 10px;
+		}
+
+		fieldset {
+			margin-bottom: 18px;
+			border: 1px solid #c8d5df;
+			border-radius: 8px;
+		}
+
+		legend {
+			color: #3d5a80;
+			font-weight: bold;
+		}
+
+		label {
+			display: inline-block;
+			width: 32%;
+			margin: 8px 0;
+			font-size: 0.9rem;
+		}
+
+		input[type="number"] {
+			width: 55px;
+			padding: 6px;
+		}
+
+		input[type="range"] {
+			width: 70%;
+		}
+
+		button {
+			padding: 10px 18px;
+			color: white;
+			background: #ee6c4d;
+			border: 0;
+			border-radius: 6px;
+			cursor: pointer;
+			font-weight: bold;
+		}
+
+		button:hover {
+			background: #d9573b;
+		}
+
+		#sample {
+			margin: 0;
+			padding: 30px;
+			border: 5px solid rgb(61, 90, 128);
+			font-size: 1.2rem;
+			line-height: 1.7;
+		}
+
+		@media (max-width: 700px) {
+			.layout {
+				grid-template-columns: 1fr;
+			}
+
+			label {
+				width: 30%;
+			}
+		}
+	</style>
+</head>
+<body>
+	<main>
+		<h1>CSS Font Control</h1>
+		<p>Use the controls to change the paragraph color and border.</p>
+
+		<div class="layout">
+			<section class="controls">
+				<fieldset>
+					<legend>Paragraph color</legend>
+					<label>Red <input id="text-red" type="number" min="0" max="255" value="32"></label>
+					<label>Green <input id="text-green" type="number" min="0" max="255" value="48"></label>
+					<label>Blue <input id="text-blue" type="number" min="0" max="255" value="64"></label>
+				</fieldset>
+
+				<fieldset>
+					<legend>Border color</legend>
+					<label>Red <input id="border-red" type="number" min="0" max="255" value="61"></label>
+					<label>Green <input id="border-green" type="number" min="0" max="255" value="90"></label>
+					<label>Blue <input id="border-blue" type="number" min="0" max="255" value="128"></label>
+				</fieldset>
+
+				<label for="border-width">Border width</label>
+				<input id="border-width" type="range" min="1" max="20" value="5">
+				<span id="width-value">5px</span>
+				<br><br>
+				<button id="apply-button" type="button">Apply colors</button>
+			</section>
+
+			<p id="sample">
+				This is some dummy text. Try different RGB values to change my
+				color, then adjust the slider to control the width of my border.
+			</p>
+		</div>
+	</main>
+
+	<script>
+		// Read the three color components and combine them into an RGB value.
+		function getRgb(prefix) {
+			return [
+				document.getElementById(prefix + "-red").value,
+				document.getElementById(prefix + "-green").value,
+				document.getElementById(prefix + "-blue").value
+			].join(", ");
+		}
+
+		// Apply the selected text and border colors to the sample paragraph.
+		document.getElementById("apply-button").addEventListener("click", function () {
+			const sample = document.getElementById("sample");
+			sample.style.color = "rgb(" + getRgb("text") + ")";
+			sample.style.borderColor = "rgb(" + getRgb("border") + ")";
+		});
+
+		// Update the border immediately whenever the slider moves.
+		document.getElementById("border-width").addEventListener("input", function () {
+			const width = this.value + "px";
+			document.getElementById("sample").style.borderWidth = width;
+			document.getElementById("width-value").textContent = width;
+		});
+	</script>
+</body>
+</html>

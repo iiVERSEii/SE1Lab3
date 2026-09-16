@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Password Verification</title>
+	<style>
+		body {
+			margin: 0;
+			padding: 50px 20px;
+			background-color: #e7f1f7;
+			color: #243447;
+			font-family: Arial, sans-serif;
+		}
+
+		main {
+			width: 420px;
+			max-width: 95%;
+			margin: auto;
+			padding: 30px;
+			background-color: white;
+			border-radius: 14px;
+			box-shadow: 0 8px 20px #0000001f;
+		}
+
+		h1 {
+			color: #3d5a80;
+		}
+
+		label {
+			display: block;
+			margin-top: 18px;
+			font-weight: bold;
+		}
+
+		input {
+			width: 100%;
+			margin-top: 6px;
+			padding: 10px;
+			border: 1px solid #b7c6d1;
+			border-radius: 6px;
+			font-size: 1rem;
+		}
+
+		button {
+			margin-top: 24px;
+			padding: 11px 18px;
+			color: white;
+			background-color: #ee6c4d;
+			border: 0;
+			border-radius: 6px;
+			cursor: pointer;
+			font-weight: bold;
+		}
+
+		button:hover {
+			background-color: #d9573b;
+		}
+	</style>
+</head>
+<body>
+	<main>
+		<h1>Password Verification</h1>
+		<p>Enter your password twice to verify that they match.</p>
+
+		<form id="password-form">
+			<label for="password">Password</label>
+			<input id="password" type="password" required>
+
+			<label for="confirm-password">Enter password again</label>
+			<input id="confirm-password" type="password" required>
+
+			<button type="submit">Verify Passwords</button>
+		</form>
+	</main>
+
+	<script>
+		// Check the password length first, then compare both password fields.
+		document.getElementById("password-form").addEventListener("submit", function (event) {
+			event.preventDefault();
+
+			const password = document.getElementById("password").value;
+			const confirmPassword = document.getElementById("confirm-password").value;
+
+			if (password.length < 8) {
+				alert("Your password must be at least 8 characters long.");
+			} else if (password !== confirmPassword) {
+				alert("The two passwords do not match.");
+			} else {
+				alert("The two passwords matched!");
+			}
+		});
+	</script>
+</body>
+</html>
